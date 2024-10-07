@@ -14,16 +14,21 @@ import java.util.ArrayList;
 
 public class TicketsManager {
 
-    private ArrayList<Ticket> list = new ArrayList<>();
-
-    Ticket generateTicket(String event, String buyer){
+    private ArrayList<String> list = new ArrayList<>();
+    private EncryptionService es = new EncryptionService(); 
+    private QRCodeService qs = new QRCodeService();
+    
+    Ticket generateTicket(String event, int price){
         System.out.println("Creating new ticket...");
-        Ticket t = new Ticket();
-        list.add(t);
+        Ticket t = new Ticket(event,price);
+        String et = es.encryptTicket(t);
+        list.add(et);      
+        qs.generateTicket(et);
+        
         return t;
     }
 
-    boolean validateTicket(String pathToQRCodeImage){
+    boolean validateTicket(String pathToQRCodeImage, String validationIno){
         System.out.println("Validating ticket...");
         System.out.println("Scan QR code and extract content...");
         System.out.println("Verify if information from qr code match some of the tickets from list...");
