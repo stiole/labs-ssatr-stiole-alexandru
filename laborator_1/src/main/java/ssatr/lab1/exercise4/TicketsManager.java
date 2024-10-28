@@ -32,8 +32,6 @@ public class TicketsManager {
         System.out.println("Validating ticket...");
         System.out.println("Scan QR code and extract content...");
         System.out.println("Verify if information from qr code match some of the tickets from list...");
-
-
         return true;
     }
 
